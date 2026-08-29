@@ -23,3 +23,26 @@ Additional Resources:
 ==========
 Community Documentation: https://docs.neoforged.net/  
 NeoForged Discord: https://discord.neoforged.net/
+
+Release workflow setup
+==========
+The release workflow always builds the mod and publishes a GitHub Release. CurseForge and Modrinth publishing are optional and only run when their repository variable is set.
+
+In the GitHub repository, go to Settings -> Secrets and variables -> Actions.
+
+Add repository variables on the Variables tab:
+
+- `CURSEFORGE_PROJECT_ID`: optional CurseForge project ID. Leave unset to skip CurseForge.
+- `MODRINTH_PROJECT_ID`: optional Modrinth project ID or slug. Leave unset to skip Modrinth.
+- `CURSEFORGE_DEPENDENCIES`: optional mc-publish dependency list for CurseForge.
+- `MODRINTH_DEPENDENCIES`: optional mc-publish dependency list for Modrinth.
+- `MOD_LOADERS`: optional loader list. Defaults to `neoforge`.
+- `MINECRAFT_GAME_VERSIONS`: optional Minecraft version list. Defaults to `minecraft_version` from `gradle.properties`.
+- `JAVA_VERSIONS`: optional Java version list. Defaults to `21`.
+
+Add repository secrets on the Secrets tab only for the platforms you enabled:
+
+- `CURSEFORGE_TOKEN`: required if `CURSEFORGE_PROJECT_ID` is set.
+- `MODRINTH_TOKEN`: required if `MODRINTH_PROJECT_ID` is set.
+
+Project IDs are variables because they are not sensitive. API tokens are secrets because they can publish files to your projects.
